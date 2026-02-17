@@ -2,7 +2,6 @@
 pragma solidity ^0.8.19;
 
 contract Transactions {
-
     // Counts how many transactions have happened
     uint256 private transactionCount;
 
@@ -32,28 +31,33 @@ contract Transactions {
         address payable receiver,
         uint amount,
         string memory message
-    ) public {
+    ) public payable {
+        require(msg.value == amount, "Amount mismatch");
+
         transactionCount++;
 
-        transactions.push(TransferStruct(
-            msg.sender,
-            receiver,
-            amount,
-            message,
-            block.timestamp
-        ));
+        // THIS is what actually moves the ETH
+        receiver.transfer(msg.value);
 
-        emit Transfer(
-            msg.sender,
-            receiver,
-            amount,
-            message,
-            block.timestamp
+        transactions.push(
+            TransferStruct(
+                msg.sender,
+                receiver,
+                amount,
+                message,
+                block.timestamp
+            )
         );
+
+        emit Transfer(msg.sender, receiver, amount, message, block.timestamp);
     }
 
     // Returns all transactions
-    function getAllTransactions() public view returns (TransferStruct[] memory) {
+    function getAllTransactions()
+        public
+        view
+        returns (TransferStruct[] memory)
+    {
         return transactions;
     }
 
