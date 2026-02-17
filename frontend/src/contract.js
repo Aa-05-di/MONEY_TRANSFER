@@ -1,0 +1,42 @@
+export const CONTRACT_ADDRESS = "0xA500661021DdDD9DDBCfF7c68cf82253Fb02B5F7";
+
+export const CONTRACT_ABI = [
+  {
+    "inputs": [
+      { "internalType": "address payable", "name": "receiver", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "internalType": "string", "name": "message", "type": "string" }
+    ],
+    "name": "addToBlockchain",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllTransactions",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "sender", "type": "address" },
+          { "internalType": "address", "name": "receiver", "type": "address" },
+          { "internalType": "uint256", "name": "amount", "type": "uint256" },
+          { "internalType": "string", "name": "message", "type": "string" },
+          { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+        ],
+        "internalType": "struct Transactions.TransferStruct[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getTransactionCount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+];
