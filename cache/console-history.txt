@@ -1,0 +1,8 @@
+touch .env
+await tx.getAllTransactions()
+await tx.getTransactionCount()
+await tx.addToBlockchain(receiver.address, 100, "Hey! First real tx!")
+const [owner, receiver] = await ethers.getSigners()
+await tx.getTransactionCount()
+const tx = await Transactions.attach("0x5fbdb2315678afecb367f032d93f642f64180aa3")
+const Transactions = await ethers.getContractFactory("Transactions")
